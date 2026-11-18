@@ -1,0 +1,37 @@
+
+public class LamportClock {
+    static int clock1 = 0, clock2 = 0, clock3 = 0;
+
+    public static void main(String[] args) {
+
+        // Process 1 event
+        clock1++;
+        System.out.println("P1 Event: " + clock1);
+
+        // Process 1 sends message to P2
+        clock1++;
+        int message = clock1;
+        System.out.println("P1 sends message: " + message);
+
+        // Process 2 receives message
+        clock2 = Math.max(clock2, message) + 1;
+        System.out.println("P2 receives message: " + clock2);
+
+        // Process 2 event
+        clock2++;
+        System.out.println("P2 Event: " + clock2);
+
+        // Process 2 sends message to P3
+        clock2++;
+        message = clock2;
+        System.out.println("P2 sends message: " + message);
+
+        // Process 3 receives message
+        clock3 = Math.max(clock3, message) + 1;
+        System.out.println("P3 receives message: " + clock3);
+
+        // Process 3 event
+        clock3++;
+        System.out.println("P3 Event: " + clock3);
+    }
+}
